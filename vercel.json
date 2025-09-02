@@ -3,15 +3,5 @@
     "src/app/api/**/*.ts": {
       "maxDuration": 10
     }
-  },
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "POSTGRES_URL": "@postgres_url"
-  },
-  "build": {
-    "env": {
-      "DATABASE_URL": "@database_url",
-      "POSTGRES_URL": "@postgres_url"
-    }
   }
 }
