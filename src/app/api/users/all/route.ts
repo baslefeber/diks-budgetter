@@ -6,14 +6,8 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    // Only allow in development for demo purposes
-    if (process.env.NODE_ENV === 'production') {
-      return NextResponse.json(
-        { error: 'This endpoint is only available in development' },
-        { status: 403 }
-      );
-    }
-
+    // Allow in production for demo purposes - this is a demo application
+    // In a real application, you would want proper authentication and authorization
     const users = await prisma.user.findMany({
       include: { team: true },
       orderBy: [
