@@ -136,8 +136,8 @@ export default function HomePage() {
               {/* Demo mode user selector */}
               {isDemoMode && <UserSelector />}
               
-              {/* Admin buttons - Available for demo */}
-              {(process.env.NODE_ENV === 'development' || process.env.VERCEL) && (
+              {/* Admin buttons - Always show for demo */}
+              {(process.env.NODE_ENV === 'development' || typeof window !== 'undefined') && (
                 <div className="flex items-center space-x-2">
                   <Button
                     variant="ghost"

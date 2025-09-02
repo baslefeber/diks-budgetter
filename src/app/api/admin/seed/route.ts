@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export async function POST() {
+async function seedDatabase() {
   try {
     // Allow seeding for demo purposes
     // Note: In a real production app, this would be restricted or use proper migrations
@@ -294,4 +294,13 @@ export async function POST() {
       { status: 500 }
     );
   }
+}
+
+// Support both GET and POST for demo purposes
+export async function GET() {
+  return seedDatabase();
+}
+
+export async function POST() {
+  return seedDatabase();
 }
