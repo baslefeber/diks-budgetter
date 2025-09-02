@@ -6,13 +6,8 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST() {
   try {
-    // Only allow in development environment
-    if (process.env.NODE_ENV === 'production') {
-      return NextResponse.json(
-        { error: 'Seeding is not allowed in production' },
-        { status: 403 }
-      );
-    }
+    // Allow seeding for demo purposes
+    // Note: In a real production app, this would be restricted or use proper migrations
 
     // Create multiple teams as per assessment requirements
     const teams = [

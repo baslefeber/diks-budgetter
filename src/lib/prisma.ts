@@ -14,6 +14,7 @@ export const prisma =
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 // Helper function to get optimal budget for a transaction
+// This is where the API receives the request and checks for the optimal budget
 export async function getOptimalBudget(teamId: number, amount: number) {
   const budget = await prisma.budget.findFirst({
     where: {
