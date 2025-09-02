@@ -1,0 +1,77 @@
+// DIKS Budget Manager - Prisma Schema
+// This is your Prisma schema file, learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  users   User[]
+  budgets Budget[]
+
+  @@map("teams")
+}
+
+model User {
+  id     Int    @id @default(autoincrement())
+  name   String
+  email  String @unique
+  teamId Int    @map("team_id")
+  role   String @default("member") // 'member' or 'admin'
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  team         Team          @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Budget {
+  id              Int      @id @default(autoincrement())
+  teamId          Int      @map("team_id")
+  name            String
+  totalAmount     Decimal  @map("total_amount") @db.Decimal(10, 2)
+  remainingAmount Decimal  @map("remaining_amount") @db.Decimal(10, 2)
+  validFrom       DateTime @map("valid_from") @db.Date
+  validUntil      DateTime @map("valid_until") @db.Date
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  team         Team          @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@unique([teamId, name])
+  @@map("budgets")
+}
+
+model Transaction {
+  id          Int     @id @default(autoincrement())
+  budgetId    Int     @map("budget_id")
+  userId      Int     @map("user_id")
+  amount      Decimal @db.Decimal(10, 2)
+  description String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  budget Budget @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
+}
