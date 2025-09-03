@@ -1,3 +1,5 @@
+![DIKS budgetter screenshot mainpage](images/DIKS budgetter screenshot mainpage.png)
+
 You can run locally using 'npm install' & 'npm run dev' or use this url to check the Vercel deployed version: https://diks-budgetter.vercel.app/
 
 The yellow Switch User, refresh and Seed DB are only for development, they won't be visible in a live version.
