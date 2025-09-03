@@ -1,4 +1,4 @@
-![DIKS budgetter screenshot mainpage](images/DIKS budgetter screenshot mainpage.png)
+![DIKS budgetter screenshot mainpage](images/screenshot-mainpage.png)
 
 You can run locally using 'npm install' & 'npm run dev' or use this url to check the Vercel deployed version: https://diks-budgetter.vercel.app/
 
